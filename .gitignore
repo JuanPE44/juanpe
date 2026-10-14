@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# anatomy figure previews and screenshots (regenerate with npm run figure:workbench)
+/tools/anatomy/out/
+/tools/anatomy/shots/
