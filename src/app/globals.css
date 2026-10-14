@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+ * Design tokens — dark retro-tech workstation.
+ * One accent (phosphor green). Edit here to re-theme the whole site.
+ * ------------------------------------------------------------------ */
+:root {
+  color-scheme: dark;
+
+  --bg: #0a0c0b;
+  --surface: #111513;
+  --surface-raised: #171c19;
+  --line: #26302b;
+  --line-strong: #3a4740;
+
+  --text: #dde5df;
+  --text-muted: #93a199;
+
+  --accent: #7df0a8;
+  --accent-dim: #3f7d58;
+  --accent-glow: rgb(125 240 168 / 0.18);
+
+  --radius: 6px;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 220ms;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-readout);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Faint scanline texture — purely decorative. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgb(255 255 255 / 0.015) 2px 3px
+  );
+  z-index: 0;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Detail panel entrance: bottom sheet on mobile, slide from right on md+. */
+.side-panel[open] {
+  animation: sheet-in var(--dur) var(--ease);
+}
+@media (min-width: 48rem) {
+  .side-panel[open] {
+    animation-name: panel-in;
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+@keyframes panel-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
