@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "figure:workbench": "node --no-warnings tools/anatomy/workbench.build.mjs",
+    "figure:audit": "node --no-warnings tools/anatomy/workbench.build.mjs --audit"
   },
   "dependencies": {
     "next": "16.4.1",

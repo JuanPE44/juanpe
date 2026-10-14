@@ -1,0 +1,102 @@
+/* Workbench figure: anatomy tokens tuned to the site's phosphor-green workstation theme.
+   Scoped to .wb-plate so nothing leaks onto :root. */
+.iso.wb-theme {
+  --anatomy-page: var(--bg, #0a0c0b);
+  --anatomy-card: var(--surface, #111513);
+  --anatomy-text: var(--text-muted, #93a199);
+  --anatomy-strong: var(--text, #dde5df);
+  --anatomy-muted: #5f6d66;
+  --anatomy-paper: var(--surface, #111513);
+  --anatomy-face: #18201c;
+  --anatomy-top: #19211d;
+  --anatomy-shade-0: #0e1311;
+  --anatomy-shade-1: #121815;
+  --anatomy-shade-2: #151c18;
+  --anatomy-shade-3: #18201b;
+  --anatomy-lit-top: #1d2a23;
+  --anatomy-lit-shade: #16201b;
+  --anatomy-hi: #cfdcd4;
+  --anatomy-mid: #65756c;
+  --anatomy-lo: #3a4740;
+  --anatomy-faint: #26302b;
+  --anatomy-lit: var(--accent, #7df0a8);
+  --anatomy-halo: #030504;
+  --anatomy-dot: #dde5df;
+  --wb-accent: var(--accent, #7df0a8);
+  --wb-accent-dim: var(--accent-dim, #3f7d58);
+  --wb-glass: #0b1510;
+  --wb-glass-on: #0f2219;
+}
+.iso.wb-theme[data-theme="light"] {
+  --anatomy-page: #f2f2ef;
+  --anatomy-card: #fbfbfa;
+  --anatomy-paper: #fbfbfa;
+  --anatomy-face: #ffffff;
+  --anatomy-top: #ffffff;
+  --anatomy-shade-0: #e4e6e3;
+  --anatomy-shade-1: #eaece9;
+  --anatomy-shade-2: #f0f1ef;
+  --anatomy-shade-3: #f6f7f5;
+  --anatomy-lit-top: #ffffff;
+  --anatomy-lit-shade: #ecf3ee;
+  --anatomy-hi: #26262a;
+  --anatomy-mid: #8a8a8f;
+  --anatomy-lo: #b4b4b8;
+  --anatomy-faint: #d4d4d6;
+  --anatomy-lit: #1f8a4c;
+  --anatomy-halo: #8a8a80;
+  --anatomy-dot: #3a3a3e;
+  --wb-accent: #1f8a4c;
+  --wb-accent-dim: #7fb894;
+  --wb-glass: #1c2a22;
+  --wb-glass-on: #12301f;
+}
+
+.wb .wb-well { fill: var(--anatomy-shade-0); }
+.wb .wb-bezel { fill: var(--anatomy-top); }
+.wb .wb-glass { fill: var(--wb-glass); }
+.wb .wb-glow { fill: var(--wb-accent); opacity: 0.08; filter: blur(6px); }
+.wb .wb-scan { fill: none; stroke: var(--wb-accent); stroke-width: 0.4px; vector-effect: non-scaling-stroke; opacity: 0.08; }
+.wb .wb-crt-text { fill: var(--wb-accent); font-family: var(--anatomy-mono); letter-spacing: 0.04em; opacity: 0.85; }
+.wb .wb-crt-title { opacity: 1; font-weight: 600; }
+.wb .wb-cursor { fill: var(--wb-accent); animation: wb-blink 1.06s steps(1, end) infinite; }
+.wb .wb-mat { fill: var(--anatomy-shade-2); }
+.wb .wb-label { fill: var(--anatomy-top); }
+.wb .wb-cord { stroke-width: 1.1px; }
+
+/* Nameplate: dark brass at rest, backlit when hot or active. */
+.wb .wb-plate-glow { fill: var(--wb-accent); opacity: 0; transition: opacity 0.4s var(--anatomy-ease); }
+.wb .wb-name { fill: var(--anatomy-mid); font-weight: 600; letter-spacing: 0.12em; transition: fill 0.4s var(--anatomy-ease); }
+.wb .wb-role { fill: var(--anatomy-lo); letter-spacing: 0.16em; transition: fill 0.4s var(--anatomy-ease); }
+.wb .wb-name-led circle, .wb .wb-cart-led circle { fill: var(--anatomy-lo); opacity: 0.6; transition: fill 0.3s var(--anatomy-ease), opacity 0.3s var(--anatomy-ease); }
+.wb [data-obj="about"][data-hot] .wb-plate-glow,
+.wb [data-obj="about"][data-active] .wb-plate-glow { opacity: 0.14; }
+.wb [data-obj="about"][data-hot] .wb-name,
+.wb [data-obj="about"][data-active] .wb-name { fill: var(--wb-accent); }
+.wb [data-obj="about"][data-hot] .wb-role,
+.wb [data-obj="about"][data-active] .wb-role { fill: var(--anatomy-hi); }
+.wb [data-obj="about"][data-hot] .wb-name-led circle,
+.wb [data-obj="about"][data-active] .wb-name-led circle,
+.wb .wb-cart-led[data-on] circle { fill: var(--wb-accent); opacity: 1; }
+
+/* Selectable objects. */
+.wb .wb-obj { cursor: pointer; outline: none; }
+.wb .wb-obj .iso-edge { transition: stroke 0.25s var(--anatomy-ease); }
+.wb .wb-obj[data-hot] .iso-solid > .iso-edge { stroke: var(--anatomy-hi); }
+.wb .wb-obj[data-active] .iso-solid > .iso-edge { stroke: var(--wb-accent); }
+.wb .wb-obj[data-active] .iso-solid > .iso-top { fill: var(--anatomy-lit-top); }
+.wb .wb-obj[data-active] .iso-solid > .iso-shade { fill: var(--anatomy-lit-shade); }
+.wb .wb-obj:focus-visible .iso-solid > .iso-edge { stroke: var(--wb-accent); }
+.wb .wb-glass { transition: fill 0.5s var(--anatomy-ease); }
+.wb [data-obj="projects"][data-hot] .wb-glass,
+.wb [data-obj="projects"][data-active] .wb-glass { fill: var(--wb-glass-on); }
+
+.wb { touch-action: pan-y; }
+.wb-plate .iso-figure { margin: 0; }
+.wb-plate .iso-plate { padding: 44px 12px 40px; }
+.wb-plate .iso-plate-corner[data-corner="readout"] { color: var(--wb-accent); }
+
+@keyframes wb-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .wb .wb-cursor { animation: none; }
+}
