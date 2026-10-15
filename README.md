@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# newportafolio
 
-## Getting Started
+Personal portfolio: a single static page with a dark retro-workstation look.
+The hero shows an interactive isometric workbench; each object on the desk
+opens a section (projects, about, stack, experience, contact) in a side panel.
+Every section is also rendered as plain scrollable HTML, so the page works
+without JavaScript.
 
-First, run the development server:
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 ·
+static export (`output: "export"`).
+
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # static site in out/
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`out/` can be served by any static host. Set `SITE_URL` at build time so
+Open Graph and canonical URLs are absolute:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+SITE_URL=https://your-domain.com npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Edit content
 
-## Learn More
+All text and data live in `src/content/` and nowhere else:
 
-To learn more about Next.js, take a look at the following resources:
+| File | What |
+| --- | --- |
+| `profile.ts` | name, role, tagline, bio, facts, CV link |
+| `projects.ts` | project cards |
+| `stack.ts` | skills by group |
+| `experience.ts` | roles and dates |
+| `contact.ts` | intro, email and channels |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Types are in `src/content/types.ts`. Section order and labels are in
+`src/sections/sections.ts`. Colors and fonts are tokens at the top of
+`src/app/globals.css`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## CV
 
-## Deploy on Vercel
+Replace `public/cv.pdf` with your CV (same file name). The "Download CV"
+button points to `profile.cvUrl` (`/cv.pdf`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Regenerate the figure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The workbench geometry is built from `tools/anatomy/workbench.build.mjs`
+into `src/figures/workbench/art.generated.ts` (do not edit that file by hand).
+
+```bash
+npm run figure:workbench   # rebuild art.generated.ts + preview pages in tools/anatomy/out/
+npm run figure:audit       # rebuild and check painter's order / overlaps
+```
+
+The CRT screen text and object counts come from `src/content`, so rerun
+`figure:workbench` after changing the number of projects, stack groups or
+roles.
+
+## Other assets
+
+- Share image: `public/og.png` (1200x630). Apple icon:
+  `public/apple-touch-icon.png`. Favicon: `public/icon.svg`.
+- Fonts: IBM Plex Sans/Mono woff2 files in `src/app/fonts/`, loaded with
+  `next/font/local` (no network needed at build time).
