@@ -5,7 +5,7 @@
   --anatomy-card: var(--surface, #111513);
   --anatomy-text: var(--text-muted, #93a199);
   --anatomy-strong: var(--text, #dde5df);
-  --anatomy-muted: #5f6d66;
+  --anatomy-muted: #7f8e86; /* 4.5:1+ on card and page (WCAG AA) */
   --anatomy-paper: var(--surface, #111513);
   --anatomy-face: #18201c;
   --anatomy-top: #19211d;
