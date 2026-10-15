@@ -96,6 +96,17 @@
 .wb-plate .iso-plate { padding: 44px 12px 40px; }
 .wb-plate .iso-plate-corner[data-corner="readout"] { color: var(--wb-accent); }
 
+/* Phones: figure goes full-bleed under the hero (cancels main's 1rem gutter),
+   the hover/tab hint gives way to the readout, which stays on one line. */
+@media (max-width: 639px) {
+  .wb-plate { margin-inline: -1rem; }
+  .wb-plate .iso-plate { padding: 34px 0 30px; box-shadow: 0 1px 0 var(--anatomy-faint), 0 -1px 0 var(--anatomy-faint); }
+  .wb-plate .iso-plate-corners { inset: 14px 1rem; }
+  .wb-plate .iso-plate-corner[data-corner="hint"] { display: none; }
+  .wb-plate .iso-plate-corner[data-corner="readout"] { left: 0; text-align: right; overflow: hidden; text-overflow: ellipsis; }
+  .wb-plate .iso-legend { padding-inline: 1rem; }
+}
+
 @keyframes wb-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   .wb .wb-cursor { animation: none; }
