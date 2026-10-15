@@ -4,7 +4,7 @@ import { useState, type ReactNode } from "react";
 import { getSection, type SectionId } from "@/sections/sections";
 import { SectionHeading } from "@/ui/SectionHeading";
 import { SidePanel } from "@/ui/SidePanel";
-import type { ActiveSection } from "./model";
+import type { ActiveSection, WorkbenchArt } from "./model";
 import { Workbench } from "./Workbench";
 
 const PANEL_TITLE_ID = "section-panel-title";
@@ -16,15 +16,17 @@ const PANEL_TITLE_ID = "section-panel-title";
  */
 export function WorkbenchExplorer({
   panels,
+  art,
 }: {
   panels: Record<SectionId, ReactNode>;
+  art: WorkbenchArt;
 }) {
   const [active, setActive] = useState<ActiveSection>(null);
   const meta = active ? getSection(active) : null;
 
   return (
     <>
-      <Workbench active={active} onSelect={setActive} />
+      <Workbench active={active} onSelect={setActive} art={art} />
       <SidePanel
         open={active !== null}
         onClose={() => setActive(null)}

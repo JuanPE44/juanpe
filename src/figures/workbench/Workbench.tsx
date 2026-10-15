@@ -8,7 +8,7 @@ import { getSection, type SectionId } from "@/sections/sections";
 import { ring, type Projection } from "../iso/iso-kit";
 import { Plate } from "../iso/react/draw";
 import { follow, useInView, useLoop, useReadout, useStillness } from "../iso/react/live";
-import { COUNTS, DESK, DIAL, LABEL, MOVES, OBJECTS, ORDER, PROJECTION, SCREENS, TRAVEL, VIEW } from "./art.generated";
+import { COUNTS, DIAL, LABEL, MOVES, ORDER, PROJECTION, SCREENS, TRAVEL, VIEW } from "./art.generated";
 import type { WorkbenchProps } from "./model";
 
 const P = PROJECTION as Projection;
@@ -48,10 +48,11 @@ function dialHoles(turn: number) {
 
 /**
  * Isometric workbench (anatomy kit). Static art is precomputed by
- * tools/anatomy/workbench.build.mjs into art.generated.ts; this component
+ * tools/anatomy/workbench.build.mjs into art.generated.ts; the heavy SVG
+ * markup arrives as the `art` prop from the server (WorkbenchFigure). This component
  * adds hover/focus/active state and the calm per-object motion.
  */
-export function Workbench({ active, onSelect }: WorkbenchProps) {
+export function Workbench({ active, onSelect, art }: WorkbenchProps) {
   const { anchor, say } = useReadout<HTMLDivElement>();
   const svgRef = useRef<SVGSVGElement>(null);
   const [hot, setHot] = useState<SectionId | null>(null);
@@ -206,7 +207,7 @@ export function Workbench({ active, onSelect }: WorkbenchProps) {
             role="group"
             aria-label={LABEL}
           >
-            <g dangerouslySetInnerHTML={{ __html: DESK }} />
+            <g dangerouslySetInnerHTML={{ __html: art.desk }} />
             {ORDER.map((id) => {
               const meta = getSection(id);
               return (
@@ -227,7 +228,7 @@ export function Workbench({ active, onSelect }: WorkbenchProps) {
                   onPointerLeave={() => setHot((current) => (current === id ? null : current))}
                   onFocus={() => setHot(id)}
                   onBlur={() => setHot((current) => (current === id ? null : current))}
-                  dangerouslySetInnerHTML={{ __html: OBJECTS[id] }}
+                  dangerouslySetInnerHTML={{ __html: art.objects[id] }}
                 />
               );
             })}

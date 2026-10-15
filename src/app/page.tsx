@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { profile } from "@/content";
-import { WorkbenchExplorer } from "@/figures/workbench/WorkbenchExplorer";
+import { WorkbenchFigure } from "@/figures/workbench/WorkbenchFigure";
 import { Hero } from "@/sections/Hero";
 import { SectionContent } from "@/sections/SectionContent";
 import { SectionNav } from "@/sections/SectionNav";
@@ -23,7 +23,7 @@ export default function Home() {
       </a>
       <SectionNav name={profile.name} />
       <main id="main" className="relative z-[1] mx-auto max-w-6xl px-4 sm:px-6">
-        <Hero profile={profile} figure={<WorkbenchExplorer panels={panels} />} />
+        <Hero profile={profile} figure={<WorkbenchFigure panels={panels} />} />
 
         {/* Classic scrollable fallback: all sections, no JS required. */}
         {SECTIONS.map((section) => (
