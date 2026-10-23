@@ -1,12 +1,12 @@
 /**
  * SECTION CONTRACT
  * ------------------------------------------------------------------
- * Shared contract between the page, the nav, the detail panel and the
- * (future) isometric Workbench figure. Each workbench object maps to
+ * Shared contract between the page, the spec sheet and the isometric
+ * Workbench figure. Each workbench object maps to
  * exactly one SectionId.
  */
 
-export type SectionId = "about" | "projects" | "stack" | "experience" | "contact";
+export type SectionId = "about" | "projects" | "experience" | "contact" | "cv";
 
 export interface SectionMeta {
   id: SectionId;
@@ -19,11 +19,11 @@ export interface SectionMeta {
 }
 
 export const SECTIONS: readonly SectionMeta[] = [
-  { id: "about", label: "About", index: "01", figureObject: "ID nameplate" },
-  { id: "projects", label: "Projects", index: "02", figureObject: "CRT monitor" },
-  { id: "stack", label: "Stack", index: "03", figureObject: "Parts drawer cabinet" },
-  { id: "experience", label: "Experience", index: "04", figureObject: "Logbook / file cabinet" },
-  { id: "contact", label: "Contact", index: "05", figureObject: "Radio / telephone" },
+  { id: "about", label: "About", index: "01", figureObject: "Photo" },
+  { id: "experience", label: "Experience", index: "02", figureObject: "Notebook" },
+  { id: "contact", label: "Contact", index: "03", figureObject: "Phone" },
+  { id: "projects", label: "Projects", index: "04", figureObject: "Laptop" },
+  { id: "cv", label: "CV", index: "05", figureObject: "iPad" },
 ] as const;
 
 export const SECTION_IDS: readonly SectionId[] = SECTIONS.map((s) => s.id);

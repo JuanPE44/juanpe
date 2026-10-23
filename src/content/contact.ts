@@ -1,24 +1,28 @@
 /**
  * CONTACT CONTENT — edit me.
  * src/content/ is the ONLY place to edit portfolio content.
- * All data below is placeholder.
  */
 import type { Contact } from "./types";
 
 export const contact: Contact = {
   intro:
-    "Open to frontend and UI engineering roles. The fastest way to reach me is email.",
-  email: "hello@example.com",
+    "Open to full-time roles and freelance projects. The fastest way to reach me is email.",
+  email: "juantandil123@gmail.com",
   channels: [
     {
       label: "GitHub",
-      value: "github.com/example",
-      href: "https://github.com/example",
+      value: "github.com/JuanPE44",
+      href: "https://github.com/JuanPE44",
     },
     {
       label: "LinkedIn",
-      value: "linkedin.com/in/example",
-      href: "https://www.linkedin.com/in/example",
+      value: "linkedin.com/in/juan-peñalba",
+      href: "https://www.linkedin.com/in/juan-pe%C3%B1alba-0025b6246/",
+    },
+    {
+      label: "X",
+      value: "x.com/Juanpealba9",
+      href: "https://x.com/Juanpealba9",
     },
   ],
 };

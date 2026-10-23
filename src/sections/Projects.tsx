@@ -6,8 +6,8 @@ import { Tag } from "@/ui/Tag";
 export function Projects({ projects }: { projects: Project[] }) {
   return (
     <ul className="grid gap-4">
-      {projects.map((project) => (
-        <li key={project.slug}>
+      {projects.map((project, i) => (
+        <li key={project.slug} data-pick={i}>
           <Panel as="article" label={`${project.year} · ${project.role}`}>
             <h3 className="text-lg font-semibold">{project.title}</h3>
             <p className="mt-2 leading-relaxed text-muted">{project.summary}</p>

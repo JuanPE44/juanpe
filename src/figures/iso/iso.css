@@ -41,7 +41,6 @@
 .iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
 .iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
 .iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
-.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
 .iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
 .iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
 .iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
@@ -53,7 +52,6 @@
 .iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
 .iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
 .iso-line[data-dashed]{stroke-dasharray:3 3}
-.iso-line[data-flow]{stroke-dasharray:2 6}
 .iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
 .iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
 .iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
@@ -68,17 +66,6 @@
 .iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
 .iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
 .iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
-.tb-body{fill:var(--anatomy-shade-2);stroke:none}
-.tb-shine{fill:var(--anatomy-top);stroke:none}
-.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
-.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
-.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
-.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
-.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
-@keyframes iso-flow{to{stroke-dashoffset:-32}}
-@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
-.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
-.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
 .iso-figure{margin:32px 0 36px}
 .iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
 .iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
@@ -103,4 +90,3 @@
 .iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
 .iso-swatch-crease{stroke:var(--anatomy-lo)!important}
 @media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
-@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}

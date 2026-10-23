@@ -56,7 +56,7 @@ npm run figure:workbench   # rebuild art.generated.ts + preview pages in tools/a
 npm run figure:audit       # rebuild and check painter's order / overlaps
 ```
 
-The CRT screen text and object counts come from `src/content`, so rerun
+The laptop screen text and object counts come from `src/content`, so rerun
 `figure:workbench` after changing the number of projects, stack groups or
 roles.
 

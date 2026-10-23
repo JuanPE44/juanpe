@@ -1,24 +1,30 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
- * Design tokens — dark retro-tech workstation.
- * One accent (phosphor green). Edit here to re-theme the whole site.
+ * Design tokens — light pastel studio.
+ * Pastels (sky, pink, violet) are decoration only: gradients, halos, borders.
+ * Text-level color uses the deep accent (AA on every surface).
  * ------------------------------------------------------------------ */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg: #0a0c0b;
-  --surface: #111513;
-  --surface-raised: #171c19;
-  --line: #26302b;
-  --line-strong: #3a4740;
+  --bg: #fbfaff;
+  --surface: #ffffff;
+  --surface-raised: #f5f3ff;
+  --line: #e6e1f5;
+  --line-strong: #cfc7ea;
 
-  --text: #dde5df;
-  --text-muted: #93a199;
+  --text: #1d1830;
+  --text-muted: #4f4868;
 
-  --accent: #7df0a8;
-  --accent-dim: #3f7d58;
-  --accent-glow: rgb(125 240 168 / 0.18);
+  --accent: #6d4bd8;
+  --accent-dim: #b9a6f5;
+  --accent-glow: rgb(167 139 250 / 0.25);
+
+  --sky: #8fd3ff;
+  --pink: #f5a3d0;
+  --violet: #a78bfa;
+  --grad: linear-gradient(120deg, var(--sky), var(--pink) 50%, var(--violet));
 
   --radius: 6px;
   --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
@@ -36,12 +42,135 @@
   --color-muted: var(--text-muted);
   --color-accent: var(--accent);
   --color-accent-dim: var(--accent-dim);
+  --color-sky: var(--sky);
+  --color-pink: var(--pink);
+  --color-violet: var(--violet);
   --font-sans: var(--font-body);
   --font-mono: var(--font-readout);
 }
 
-html {
-  scroll-behavior: smooth;
+/* The home page is one full-viewport stage: the page itself never scrolls
+   (the spec sheet and the portfolio page scroll inside). page.tsx lifts this under <noscript>. */
+html:has(.wb-main),
+body:has(.wb-main) {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Switch from the bench to a normal scrollable reading of every section. */
+.pf-toggle {
+  position: absolute;
+  /* Inside the plate frame, top-left, clear of the corner readout. */
+  top: 52px;
+  left: 36px;
+  z-index: 3;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--text);
+  padding: 7px 12px;
+  font-family: var(--font-readout), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+.pf-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pf-page {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+}
+.pf-page[hidden] {
+  display: none;
+}
+.pf-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex: none;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  padding: 14px 20px;
+}
+.pf-bar-title {
+  min-width: 0;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.pf-close {
+  flex: none;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  padding: 7px 12px;
+  font-family: var(--font-readout), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.pf-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.pf-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  flex: none;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  padding: 10px 20px;
+  font-family: var(--font-readout), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pf-nav a {
+  color: var(--text-muted);
+}
+.pf-nav a:hover {
+  color: var(--accent);
+}
+.pf-scroll {
+  flex: 1;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.pf-body {
+  width: min(48rem, 100%);
+  margin-inline: auto;
+  padding: 8px 20px 64px;
+}
+@media (max-width: 560px) {
+  .pf-toggle {
+    top: 46px;
+    left: 18px;
+    padding: 6px 9px;
+    font-size: 10px;
+  }
+  .pf-bar,
+  .pf-nav {
+    padding-inline: 14px;
+  }
+  .pf-bar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 body {
@@ -50,17 +179,16 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
-/* Faint scanline texture — purely decorative. */
+/* Soft pastel washes — purely decorative. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0 2px,
-    rgb(255 255 255 / 0.015) 2px 3px
-  );
+  background:
+    radial-gradient(40% 50% at 12% 18%, rgb(143 211 255 / 0.18), transparent 70%),
+    radial-gradient(38% 45% at 88% 22%, rgb(245 163 208 / 0.16), transparent 70%),
+    radial-gradient(45% 50% at 60% 92%, rgb(167 139 250 / 0.14), transparent 70%);
   z-index: 0;
 }
 
@@ -71,41 +199,16 @@ body::before {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--pink);
+  color: var(--text);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-/* Detail panel entrance: bottom sheet on mobile, slide from right on md+. */
-.side-panel[open] {
-  animation: sheet-in var(--dur) var(--ease);
-}
-@media (min-width: 48rem) {
-  .side-panel[open] {
-    animation-name: panel-in;
-  }
-}
-@keyframes sheet-in {
-  from {
-    transform: translateY(24px);
-    opacity: 0;
-  }
-}
-@keyframes panel-in {
-  from {
-    transform: translateX(24px);
-    opacity: 0;
   }
 }

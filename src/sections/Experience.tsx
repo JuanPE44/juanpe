@@ -3,8 +3,8 @@ import type { ExperienceEntry } from "@/content";
 export function Experience({ entries }: { entries: ExperienceEntry[] }) {
   return (
     <ol className="space-y-6 border-l border-line pl-6">
-      {entries.map((entry) => (
-        <li key={`${entry.company}-${entry.period}`} className="relative">
+      {entries.map((entry, i) => (
+        <li key={`${entry.company}-${entry.period}`} className="relative" data-pick={i}>
           <span
             aria-hidden="true"
             className="absolute -left-[29px] top-2 h-2 w-2 rounded-full bg-accent"

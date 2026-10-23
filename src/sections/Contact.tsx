@@ -11,7 +11,7 @@ export function Contact({ contact }: { contact: ContactData }) {
       >
         {contact.email}
       </a>
-      <dl className="grid gap-3 sm:grid-cols-2">
+      <dl className="grid gap-3 @md:grid-cols-2">
         {contact.channels.map((channel) => (
           <div key={channel.href}>
             <dt className="font-mono text-xs tracking-widest text-muted">

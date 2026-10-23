@@ -152,23 +152,27 @@ function Swatch({ mark }: { mark: KeyMark }) {
 }
 
 interface PlateProps {
-  fig: string;
+  fig?: string;
   title?: string;
   hint?: React.ReactNode;
   readout?: React.ReactNode;
   keys?: LegendKey[];
   caption?: React.ReactNode;
+  /** Full-viewport stage: the plate fills its parent and the drawing fills the plate. */
+  stage?: boolean;
   children: React.ReactNode;
 }
 
-export function Plate({ fig, title, hint, readout, keys = [], caption, children }: PlateProps) {
+export function Plate({ fig, title, hint, readout, keys = [], caption, stage = false, children }: PlateProps) {
   return (
-    <figure className="iso-figure">
+    <figure className="iso-figure" data-stage={stage ? "" : undefined}>
       <div className="iso-plate">
         <div className="iso-plate-corners" aria-hidden="true">
-          <span className="iso-plate-corner" data-corner="fig">
-            {fig}
-          </span>
+          {fig ? (
+            <span className="iso-plate-corner" data-corner="fig">
+              {fig}
+            </span>
+          ) : null}
           {title ? (
             <span className="iso-plate-corner" data-corner="title">
               {title}

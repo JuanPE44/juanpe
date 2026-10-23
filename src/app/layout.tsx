@@ -21,6 +21,8 @@ const plexMono = localFont({
   style: "normal",
   fallback: ["ui-monospace", "monospace"],
   adjustFontFallback: false,
+  // Only the small corner readout uses it: not worth competing with the first paint.
+  preload: false,
 });
 
 const title = `${profile.name} — ${profile.role}`;
@@ -60,8 +62,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0c0b",
-  colorScheme: "dark",
+  themeColor: "#fbfaff",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
