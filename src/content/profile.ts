@@ -1,23 +1,23 @@
 /**
  * PROFILE CONTENT — edit me.
  * src/content/ is the ONLY place to edit portfolio content.
- * All data below is placeholder.
  */
 import type { Profile } from "./types";
 
 export const profile: Profile = {
   name: "Juan Peñalba",
-  role: "Frontend / UI Engineer",
+  role: "Software Developer",
   tagline:
-    "I build interfaces like precision machines: every part fits and moves with intent.",
-  location: "Buenos Aires, AR · Remote",
+    "I build web products end to end, from the database to the last frame of an animation.",
+  location: "Buenos Aires, AR",
   bio: [
-    "Frontend engineer focused on design systems, interaction design and the quiet details that make an interface feel solid.",
-    "I work at the seam between design and engineering: turning specs into accessible, fast, well-tested components that teams can build on.",
+    "Software developer working across the stack with TypeScript: React, Next.js and Astro on the front, Node.js and SQL on the back.",
+    "I built and run Exactamente, a platform where university students share academic resources, and I've shipped 3D-heavy marketing sites, component libraries and B2B product interfaces for clients.",
+    "Systems Engineering student at UNICEN, with a technical degree in computer programming.",
   ],
   facts: [
-    { label: "EXP", value: "7 yrs" },
-    { label: "FOCUS", value: "Design systems" },
+    { label: "USERS", value: "200+ daily" },
+    { label: "RESOURCES", value: "4,000+" },
     { label: "STATUS", value: "Open to roles" },
   ],
   cvUrl: "/cv.pdf",

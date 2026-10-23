@@ -1,113 +1,323 @@
-/* Workbench figure: anatomy tokens tuned to the site's phosphor-green workstation theme.
+/* Workbench figure: anatomy tokens tuned to the site's light pastel theme
+   (lavender faces, deep violet ink, pastel washes on the plate).
    Scoped to .wb-plate so nothing leaks onto :root. */
 .iso.wb-theme {
-  --anatomy-page: var(--bg, #0a0c0b);
-  --anatomy-card: var(--surface, #111513);
-  --anatomy-text: var(--text-muted, #93a199);
-  --anatomy-strong: var(--text, #dde5df);
-  --anatomy-muted: #7f8e86; /* 4.5:1+ on card and page (WCAG AA) */
-  --anatomy-paper: var(--surface, #111513);
-  --anatomy-face: #18201c;
-  --anatomy-top: #19211d;
-  --anatomy-shade-0: #0e1311;
-  --anatomy-shade-1: #121815;
-  --anatomy-shade-2: #151c18;
-  --anatomy-shade-3: #18201b;
-  --anatomy-lit-top: #1d2a23;
-  --anatomy-lit-shade: #16201b;
-  --anatomy-hi: #cfdcd4;
-  --anatomy-mid: #65756c;
-  --anatomy-lo: #3a4740;
-  --anatomy-faint: #26302b;
-  --anatomy-lit: var(--accent, #7df0a8);
-  --anatomy-halo: #030504;
-  --anatomy-dot: #dde5df;
-  --wb-accent: var(--accent, #7df0a8);
-  --wb-accent-dim: var(--accent-dim, #3f7d58);
-  --wb-glass: #0b1510;
-  --wb-glass-on: #0f2219;
-}
-.iso.wb-theme[data-theme="light"] {
-  --anatomy-page: #f2f2ef;
-  --anatomy-card: #fbfbfa;
-  --anatomy-paper: #fbfbfa;
+  --anatomy-page: var(--bg, #fbfaff);
+  --anatomy-card: var(--surface, #ffffff);
+  --anatomy-text: var(--text-muted, #625c7d);
+  --anatomy-strong: var(--text, #1d1830);
+  --anatomy-muted: #6b6585; /* 4.5:1+ on card and page (WCAG AA) */
+  --anatomy-paper: var(--surface, #ffffff);
   --anatomy-face: #ffffff;
   --anatomy-top: #ffffff;
-  --anatomy-shade-0: #e4e6e3;
-  --anatomy-shade-1: #eaece9;
-  --anatomy-shade-2: #f0f1ef;
-  --anatomy-shade-3: #f6f7f5;
-  --anatomy-lit-top: #ffffff;
-  --anatomy-lit-shade: #ecf3ee;
-  --anatomy-hi: #26262a;
-  --anatomy-mid: #8a8a8f;
-  --anatomy-lo: #b4b4b8;
-  --anatomy-faint: #d4d4d6;
-  --anatomy-lit: #1f8a4c;
-  --anatomy-halo: #8a8a80;
-  --anatomy-dot: #3a3a3e;
-  --wb-accent: #1f8a4c;
-  --wb-accent-dim: #7fb894;
-  --wb-glass: #1c2a22;
-  --wb-glass-on: #12301f;
+  --anatomy-shade-0: #d2c9ef;
+  --anatomy-shade-1: #e0d9f6;
+  --anatomy-shade-2: #ece8fa;
+  --anatomy-shade-3: #f6f4fd;
+  --anatomy-lit-top: #e4dbff;
+  --anatomy-lit-shade: #cfe7fb;
+  --anatomy-hi: #2a2244;
+  --anatomy-mid: #6b6488; /* 4.5:1+ on white: text on faces */
+  --anatomy-lo: #948bb8; /* 3:1+ on white: default edges */
+  --anatomy-faint: #cdc5e6;
+  --anatomy-lit: var(--accent, #6d4bd8);
+  --anatomy-halo: #8f7fc4;
+  --anatomy-halo-opacity: 0.3;
+  --anatomy-dot: #3a3358;
+  --wb-accent: var(--accent, #6d4bd8);
+  --wb-accent-dim: var(--accent-dim, #b9a6f5);
+  --wb-glass: #ebe6fb;
+  --wb-glass-on: #f8f6ff;
+  --wb-screen-ink: color-mix(in srgb, var(--wb-accent) 70%, #1d1830);
+  --wb-screen-strong: color-mix(in srgb, var(--wb-accent) 55%, #1d1830);
+  /* Holographic low-poly hues (faceted pot). */
+  --holo-0: #8fd3ff;
+  --holo-1: #f5a3d0;
+  --holo-2: #a78bfa;
+  --holo-3: #a8f0e6;
+  --holo-4: #ffd2b8;
+  --holo-ink: #4b3d7a;
 }
 
-.wb .wb-well { fill: var(--anatomy-shade-0); }
-.wb .wb-bezel { fill: var(--anatomy-top); }
-.wb .wb-glass { fill: var(--wb-glass); }
-.wb .wb-glow { fill: var(--wb-accent); opacity: 0.08; filter: blur(6px); }
+/* Faceted pot: each triangle one pastel, darkened toward violet ink by its light band;
+   a thin white seam between facets reads as the holographic sheen. */
+.wb .wb-facet {
+  fill: color-mix(in oklab, var(--holo-ink) var(--dk, 0%), var(--hue, var(--holo-0)));
+  stroke: rgb(255 255 255 / 0.6); stroke-width: 0.35px; stroke-linejoin: round; vector-effect: non-scaling-stroke;
+}
+.wb .wb-facet[data-hue="0"] { --hue: var(--holo-0); }
+.wb .wb-facet[data-hue="1"] { --hue: var(--holo-1); }
+.wb .wb-facet[data-hue="2"] { --hue: var(--holo-2); }
+.wb .wb-facet[data-hue="3"] { --hue: var(--holo-3); }
+.wb .wb-facet[data-hue="4"] { --hue: var(--holo-4); }
+.wb .wb-facet[data-shade="0"] { --dk: 22%; }
+.wb .wb-facet[data-shade="1"] { --dk: 14%; }
+.wb .wb-facet[data-shade="2"] { --dk: 7%; }
+.wb .wb-facet-cap { fill: var(--anatomy-top); stroke: var(--anatomy-lo); stroke-width: 0.35px; vector-effect: non-scaling-stroke; }
+
+/* Pastel washes behind the bench. */
+.wb-plate .iso-plate {
+  background:
+    radial-gradient(42% 48% at 18% 22%, rgb(143 211 255 / 0.2), transparent 72%),
+    radial-gradient(40% 45% at 84% 18%, rgb(245 163 208 / 0.18), transparent 72%),
+    radial-gradient(50% 50% at 55% 88%, rgb(167 139 250 / 0.17), transparent 72%),
+    var(--anatomy-card);
+}
+
+.wb .wb-glass { fill: color-mix(in srgb, var(--wb-glass) 55%, var(--anatomy-hi)); }
+.wb .wb-glow { fill: url(#wb-g-glow); opacity: 0.1; }
 .wb .wb-scan { fill: none; stroke: var(--wb-accent); stroke-width: 0.4px; vector-effect: non-scaling-stroke; opacity: 0.08; }
-.wb .wb-crt-text { fill: var(--wb-accent); font-family: var(--anatomy-mono); letter-spacing: 0.04em; opacity: 0.85; }
-.wb .wb-crt-title { opacity: 1; font-weight: 600; }
-.wb .wb-cursor { fill: var(--wb-accent); animation: wb-blink 1.06s steps(1, end) infinite; }
+/* Screen ink: the accent pulled toward the page ink so it holds AA on the glass
+   (secondary 6:1, title 7.3:1 on the tinted window). */
+.wb .wb-screen-text { fill: var(--wb-screen-ink); font-family: var(--anatomy-mono); letter-spacing: 0.04em; font-weight: 600; }
+.wb .wb-screen-title { fill: var(--wb-screen-strong); font-weight: 700; }
+.wb .wb-display { fill: var(--wb-glass); transition: fill 0.5s var(--anatomy-ease); }
+.wb .wb-menubar { fill: var(--wb-accent); opacity: 0.1; }
+.wb .wb-window { fill: color-mix(in srgb, var(--wb-accent) 7%, var(--wb-glass)); }
+.wb .wb-screen-dot { fill: var(--wb-accent-dim); }
+.wb .wb-cam { fill: var(--anatomy-lo); }
+.wb .wb-dock { fill: var(--wb-accent); opacity: 0.08; }
+.wb .wb-dock-icon { fill: var(--wb-accent-dim); opacity: 0.55; transition: fill 0.3s var(--anatomy-ease), opacity 0.3s var(--anatomy-ease); }
+.wb [data-part^="dock-"]:has(.wb-dock-led[data-on]) .wb-dock-icon { fill: var(--wb-accent); opacity: 1; }
+.wb .wb-dock-led circle { fill: var(--wb-accent); opacity: 0; transition: opacity 0.3s var(--anatomy-ease); }
+.wb .wb-dock-led[data-on] circle { opacity: 1; }
+
+/* Phone: a lock screen at rest, an incoming call while contact is in focus. */
+.wb .wb-phone-time { fill: var(--wb-accent); font-family: var(--anatomy-mono); font-weight: 600; }
+.wb .wb-phone-small { fill: var(--wb-screen-ink); font-family: var(--anatomy-mono); font-weight: 600; letter-spacing: 0.08em; }
+.wb .wb-phone-name { fill: var(--wb-screen-strong); font-family: var(--anatomy-mono); font-weight: 700; letter-spacing: 0.06em; }
+.wb .wb-phone-key { fill: var(--wb-accent-dim); opacity: 0.35; }
+/* Call buttons: accept violet, decline pink, white handsets. The accept ring pulses by its stroke
+   (no transform, so it stays centred on the button inside the tilted screen plane). */
+.wb .wb-call-yes { fill: var(--wb-accent); }
+.wb .wb-call-no { fill: #d6589b; }
+.wb .wb-call-handset { fill: #fff; }
+.wb .wb-call-ring { fill: none; stroke: var(--wb-accent); stroke-width: 0; opacity: 0; }
+.wb [data-ringing] .wb-call-ring { animation: wb-ring 1.4s ease-out infinite; }
+.wb .wb-phone-idle, .wb .wb-phone-call { transition: opacity 0.4s var(--anatomy-ease); }
+.wb .wb-phone-call { opacity: 0; }
+.wb [data-ringing] .wb-phone-call { opacity: 1; }
+.wb [data-ringing] .wb-phone-idle { opacity: 0; }
+/* Idle loops repaint the whole figure in WebKit, so they only run while the bench shows their object
+   (data-shot: hovered, open or on the tour, written by the animation loop). */
+.wb .wb-cursor { fill: var(--wb-accent); }
+.wb[data-shot="projects"] .wb-cursor { animation: wb-blink 1.06s steps(1, end) infinite; }
 .wb .wb-mat { fill: var(--anatomy-shade-2); }
 .wb .wb-label { fill: var(--anatomy-top); }
 .wb .wb-cord { stroke-width: 1.1px; }
 
-/* Nameplate: dark brass at rest, backlit when hot or active. */
-.wb .wb-plate-glow { fill: var(--wb-accent); opacity: 0; transition: opacity 0.4s var(--anatomy-ease); }
+/* Mate set (decor): the name printed on the thermos and a little steam rising from the mate. */
+.wb .wb-yerba { fill: color-mix(in oklab, var(--anatomy-lit) 30%, var(--anatomy-shade-0)); }
 .wb .wb-name { fill: var(--anatomy-mid); font-weight: 600; letter-spacing: 0.12em; transition: fill 0.4s var(--anatomy-ease); }
-.wb .wb-role { fill: var(--anatomy-lo); letter-spacing: 0.16em; transition: fill 0.4s var(--anatomy-ease); }
-.wb .wb-name-led circle, .wb .wb-cart-led circle { fill: var(--anatomy-lo); opacity: 0.6; transition: fill 0.3s var(--anatomy-ease), opacity 0.3s var(--anatomy-ease); }
-.wb [data-obj="about"][data-hot] .wb-plate-glow,
-.wb [data-obj="about"][data-active] .wb-plate-glow { opacity: 0.14; }
-.wb [data-obj="about"][data-hot] .wb-name,
-.wb [data-obj="about"][data-active] .wb-name { fill: var(--wb-accent); }
-.wb [data-obj="about"][data-hot] .wb-role,
-.wb [data-obj="about"][data-active] .wb-role { fill: var(--anatomy-hi); }
-.wb [data-obj="about"][data-hot] .wb-name-led circle,
-.wb [data-obj="about"][data-active] .wb-name-led circle,
-.wb .wb-cart-led[data-on] circle { fill: var(--wb-accent); opacity: 1; }
+.wb .wb-name-wrap .wb-name { letter-spacing: 0; } /* spacing comes from the wrap */
+.wb .wb-steam { fill: none; stroke: var(--anatomy-hi); stroke-width: 0.6px; stroke-linecap: round; opacity: 0; transition: opacity 0.6s var(--anatomy-ease); }
+.wb .wb-steam { opacity: 0.35; }
+.wb[data-shot="contact"] .wb-steam { animation: wb-steam 2.4s ease-in-out infinite; } /* the mate sits by the phone */
+
+/* Desk keypad: up/down keys held to move, memory keys recall a height. */
+.wb .wb-key { cursor: pointer; outline: none; }
+.wb .wb-key-hit { fill: transparent; }
+.wb .wb-key .iso-line { transition: stroke 0.2s var(--anatomy-ease); }
+.wb .wb-key-num { fill: var(--anatomy-mid); font-family: var(--anatomy-mono); transition: fill 0.2s var(--anatomy-ease); }
+.wb .wb-key:hover .iso-line,
+.wb .wb-key:focus-visible .iso-line { stroke: var(--anatomy-hi); }
+.wb .wb-key:hover .wb-key-num,
+.wb .wb-key:focus-visible .wb-key-num { fill: var(--anatomy-hi); }
+.wb .wb-key[data-pressed] .iso-line { stroke: var(--wb-accent); }
+.wb .wb-key[data-pressed] .wb-key-num { fill: var(--wb-accent); }
 
 /* Selectable objects. */
 .wb .wb-obj { cursor: pointer; outline: none; }
-.wb .wb-obj .iso-edge { transition: stroke 0.25s var(--anatomy-ease); }
-.wb .wb-obj[data-hot] .iso-solid > .iso-edge { stroke: var(--anatomy-hi); }
-.wb .wb-obj[data-active] .iso-solid > .iso-edge { stroke: var(--wb-accent); }
-.wb .wb-obj[data-active] .iso-solid > .iso-top { fill: var(--anatomy-lit-top); }
-.wb .wb-obj[data-active] .iso-solid > .iso-shade { fill: var(--anatomy-lit-shade); }
-.wb .wb-obj:focus-visible .iso-solid > .iso-edge { stroke: var(--wb-accent); }
-.wb .wb-glass { transition: fill 0.5s var(--anatomy-ease); }
-.wb [data-obj="projects"][data-hot] .wb-glass,
-.wb [data-obj="projects"][data-active] .wb-glass { fill: var(--wb-glass-on); }
+/* Hover tints the edges; active and keyboard focus also thicken them and tint
+   the faces, so selection never relies on hue alone. */
+.wb .wb-obj .iso-edge { transition: stroke 0.25s var(--anatomy-ease), stroke-width 0.25s var(--anatomy-ease); }
+.wb .wb-obj {
+  transform-box: fill-box; transform-origin: 50% 100%;
+  transition: opacity 0.45s var(--anatomy-ease), transform 0.25s var(--anatomy-ease);
+}
 
-.wb { touch-action: pan-y; }
-.wb-plate .iso-figure { margin: 0; }
-.wb-plate .iso-plate { padding: 44px 12px 40px; }
-.wb-plate .iso-plate-corner[data-corner="readout"] { color: var(--wb-accent); }
+/* At rest, the object under the pointer or keyboard focus rises a touch and takes a faint accent glow. */
+.wb-plate:not([data-zoomed]) .wb .wb-obj[data-hot] {
+  transform: translateY(-1.5px) scale(1.03);
+}
+/* First load: the laptop lifts and outlines a few times while its tag invites a click (NUDGE in Workbench.tsx).
+   Animates transform and stroke, not a filter: cheap and identical in every engine. */
+.wb-plate:not([data-zoomed]) .wb .wb-obj[data-nudge] { animation: wb-nudge 1.6s var(--anatomy-ease) 3; }
+.wb .wb-obj[data-nudge] .iso-solid > .iso-edge { stroke: var(--wb-accent); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+@keyframes wb-nudge {
+  0%, 100% { transform: none; }
+  40% { transform: translateY(-2.5px) scale(1.04); }
+}
+.wb .wb-tag-narrow { display: none; }
+@media (hover: none), (max-width: 639px) {
+  .wb .wb-tag-wide { display: none; }
+  .wb .wb-tag-narrow { display: inline; }
+}
 
-/* Phones: figure goes full-bleed under the hero (cancels main's 1rem gutter),
-   the hover/tab hint gives way to the readout, which stays on one line. */
-@media (max-width: 639px) {
-  .wb-plate { margin-inline: -1rem; }
-  .wb-plate .iso-plate { padding: 34px 0 30px; box-shadow: 0 1px 0 var(--anatomy-faint), 0 -1px 0 var(--anatomy-faint); }
-  .wb-plate .iso-plate-corners { inset: 14px 1rem; }
-  .wb-plate .iso-plate-corner[data-corner="hint"] { display: none; }
-  .wb-plate .iso-plate-corner[data-corner="readout"] { left: 0; text-align: right; overflow: hidden; text-overflow: ellipsis; }
-  .wb-plate .iso-legend { padding-inline: 1rem; }
+/* Keyboard and screen-reader entry points, in section order; the focused object shows the focus. */
+.wb-nav button {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* Name tags: a white pill with the section name above the object. */
+.wb .wb-tag { opacity: 0; pointer-events: none; transition: opacity 0.2s var(--anatomy-ease), transform 0.2s var(--anatomy-ease); }
+.wb .wb-tag rect { fill: var(--anatomy-card); stroke: var(--wb-accent); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.wb .wb-tag text { fill: var(--wb-accent); font-family: var(--anatomy-mono); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.wb-plate:not([data-zoomed]) .wb .wb-tag[data-hot] { opacity: 1; }
+.wb .wb-obj[data-hot] .iso-solid > .iso-edge { stroke: var(--wb-accent); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+/* Idle tour: the object it points at takes the full hover (lift, outline and tag). */
+.wb-plate:not([data-zoomed]) .wb .wb-obj[data-tour] { transform: translateY(-1.5px) scale(1.03); }
+.wb-plate:not([data-zoomed]) .wb .wb-tag[data-tour] { opacity: 1; }
+.wb-plate:not([data-zoomed]) .wb .wb-obj[data-tour] .iso-solid > .iso-edge { stroke: var(--wb-accent); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.wb .wb-obj[data-active] .iso-solid > .iso-edge,
+.wb .wb-obj[data-focus] .iso-solid > .iso-edge { stroke: var(--wb-accent); stroke-width: 1.4px; vector-effect: non-scaling-stroke; }
+.wb .wb-obj[data-active] .iso-solid > .iso-top,
+.wb .wb-obj[data-focus] .iso-solid > .iso-top { fill: var(--anatomy-lit-top); }
+.wb .wb-obj[data-active] .iso-solid > .iso-shade,
+.wb .wb-obj[data-focus] .iso-solid > .iso-shade { fill: var(--anatomy-lit-shade); }
+/* iPad: the CV as a PDF page; the screen wakes while it is in focus. */
+/* A white sheet on the glass with a bold "CV" heading: reads as a résumé, not a dark slab. */
+.wb .wb-page { fill: var(--anatomy-top); }
+.wb .wb-pdf-title { fill: var(--wb-screen-strong); font-family: var(--anatomy-mono); font-weight: 700; letter-spacing: 0.04em; }
+.wb .wb-pdf-photo { fill: var(--anatomy-lo); }
+.wb .wb-pdf-dot { fill: var(--anatomy-mid); }
+.wb .wb-pdf-btn { fill: var(--wb-accent-dim); transition: fill 0.4s var(--anatomy-ease); }
+.wb .wb-pdf-arrow { fill: none; stroke: var(--wb-glass); stroke-width: 0.5px; stroke-linecap: round; stroke-linejoin: round; }
+.wb [data-obj="cv"][data-hot] .wb-pdf-btn,
+.wb [data-obj="cv"][data-active] .wb-pdf-btn { fill: var(--wb-accent); }
+.wb [data-obj="cv"][data-hot] .wb-display,
+.wb [data-obj="cv"][data-active] .wb-display,
+.wb [data-obj="projects"][data-hot] .wb-display,
+.wb [data-obj="projects"][data-active] .wb-display { fill: var(--wb-glass-on); }
+
+/* Zoomed: the other objects step back while the camera holds one. */
+.wb-plate[data-zoomed] .wb-obj:not([data-active]) { opacity: 0.22; }
+.wb-plate[data-zoomed] .wb-obj:not([data-active])[data-hot] { opacity: 0.6; }
+
+/* Full-viewport stage: the plate fills the viewport less a 16px gutter and the
+   drawing fills the plate; Workbench.tsx frames it through the viewBox. */
+.wb-plate { height: 100%; }
+.wb-plate .iso-figure[data-stage] { margin: 0; height: 100%; padding: 16px; box-sizing: border-box; }
+.wb-plate [data-stage] > .iso-plate { height: 100%; padding: 0; overflow: hidden; container-type: inline-size; }
+.wb-plate [data-stage] .iso-plate-corners { z-index: 2; }
+/* Corners: 13px, ink at 6:1+ on the card (AA); the readout's section name leads. */
+.wb-plate .iso-plate-corner { font-size: 13px; color: var(--anatomy-text); }
+.wb-plate .iso-plate-corner[data-corner="title"] { color: var(--anatomy-strong); }
+.wb-plate .iso-plate-corner[data-corner="readout"] { display: flex; align-items: baseline; gap: 0.5em; color: var(--anatomy-text); }
+.wb-plate .wb-ro-label { font-size: 14px; font-weight: 600; color: var(--wb-accent); letter-spacing: 0.06em; text-transform: uppercase; }
+.wb-plate .wb-ro-label:empty { display: none; }
+.wb-plate .wb-ro-prefix::after { content: " ·"; }
+.wb-plate .wb-ro-label:not(:empty) + .wb-ro-object::before { content: "· "; }
+/* No pan or pinch on the bench (iOS would drag the page); taps still fire. */
+.wb-stage { position: absolute; inset: 0; touch-action: none; }
+.wb-stage .iso-svg { width: 100%; height: 100%; }
+.wb-hint-narrow { display: none; }
+@media (hover: none), (max-width: 639px) {
+  .wb-hint-wide { display: none; }
+  .wb-hint-narrow { display: inline; }
+}
+
+/* Spec sheet: a plate-styled card in the space the zoom leaves free.
+   Phones: bottom sheet. From 720px of plate width (STAGE.wide): right column. */
+.wb-sheet {
+  position: absolute; z-index: 3; left: 12px; right: 12px; bottom: 12px; height: calc(56% - 12px);
+  display: flex; flex-direction: column;
+  background: var(--anatomy-card); color: var(--text, #1d1830);
+  box-shadow: 0 0 0 1px var(--anatomy-lo), 0 18px 40px -12px rgb(109 75 216 / 0.22);
+  opacity: 0; transform: translateY(18px); pointer-events: none;
+  transition: opacity 0.25s var(--anatomy-ease), transform 0.35s var(--anatomy-ease);
+}
+.wb-sheet[data-open] {
+  opacity: 1; transform: none; pointer-events: auto;
+  transition-delay: 0.22s;
+  transition-duration: 0.4s, 0.5s;
+}
+.wb-sheet::before, .wb-sheet::after {
+  content: ""; position: absolute; width: 9px; height: 9px; pointer-events: none;
+  border-color: var(--wb-accent); border-style: solid; border-width: 0;
+}
+.wb-sheet::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.wb-sheet::after { right: -1px; bottom: -1px; border-right-width: 1px; border-bottom-width: 1px; }
+.wb-sheet-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex: none;
+  padding: 10px 16px; border-bottom: 1px solid var(--anatomy-faint);
+  font: 11.5px/1 var(--anatomy-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--anatomy-muted);
+  background: repeating-linear-gradient(90deg, var(--anatomy-faint) 0 1px, transparent 1px 8px) bottom / 100% 4px no-repeat;
+}
+.wb-sheet-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wb-sheet-close {
+  flex: none; padding: 4px 6px; border: 1px solid var(--anatomy-lo); border-radius: 2px;
+  font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--anatomy-text); cursor: pointer;
+}
+.wb-sheet-close:hover { border-color: var(--wb-accent); color: var(--wb-accent); }
+.wb-sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 18px 16px 24px; line-height: 1.65; scrollbar-width: thin; scrollbar-color: var(--anatomy-lo) transparent; }
+.wb-sheet [data-pick] { transition: box-shadow 0.25s var(--anatomy-ease); }
+.wb-sheet [data-picked] { box-shadow: inset 2px 0 0 var(--wb-accent); }
+.wb-sheet ol > li[data-pick] { padding-left: 12px; }
+@container (min-width: 720px) {
+  .wb-sheet {
+    left: auto; right: 16px; top: 44px; bottom: 40px; height: auto;
+    width: min(480px, 42cqw);
+    transform: translateX(18px);
+  }
+  .wb-sheet-body { padding: 22px 22px 28px; }
+}
+/* Phones, zoomed: the sheet covers the bottom corners. */
+@container (max-width: 719.98px) {
+  .wb-plate[data-zoomed] .iso-plate-corner[data-corner="hint"],
+  .wb-plate[data-zoomed] .iso-plate-corner[data-corner="readout"] { visibility: hidden; }
 }
 
 @keyframes wb-blink { 50% { opacity: 0; } }
+@keyframes wb-ring { 0% { stroke-width: 0; opacity: 0.5; } 100% { stroke-width: 4.4px; opacity: 0; } }
+@keyframes wb-steam { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.2px); } }
 @media (prefers-reduced-motion: reduce) {
-  .wb .wb-cursor { animation: none; }
+  .wb .wb-cursor, .wb .wb-steam, .wb .wb-call-ring, .wb .wb-obj .iso-edge { animation: none !important; }
+  .wb .wb-obj, .wb .wb-tag { transition: none !important; }
+  .wb .wb-obj[data-nudge] { animation: none !important; }
+  .wb-plate:not([data-zoomed]) .wb .wb-obj[data-hot] { transform: none; }
 }
+.wb .wb-chair { pointer-events: none; }
+/* Flat holographic sheets (notebook cover) read louder than turned bodies: soften them. */
+.wb .wb-holo-sheet { opacity: 0.62; }
+
+/* Holographic stickers: white die-cut border, low-poly fill, and a sheen that sweeps across
+   while the object is hovered or open. */
+/* A thin vinyl decal: a faint cut line, an off-white die, and (on curved bodies) the same falloff as the surface. */
+.wb .wb-sticker-edge { fill: none; stroke: var(--anatomy-faint); stroke-width: 1.4; stroke-linejoin: round; }
+.wb .wb-sticker-die { fill: var(--anatomy-top); stroke: var(--anatomy-top); stroke-width: 0.6; stroke-linejoin: round; }
+.wb .wb-sticker-falloff { pointer-events: none; }
+.wb .wb-sticker-falloff-0 { stop-color: var(--anatomy-shade-1); stop-opacity: 0; }
+.wb .wb-sticker-falloff-1 { stop-color: var(--anatomy-shade-1); stop-opacity: 0.85; }
+.wb .wb-sticker .wb-facet { stroke-width: 0.25px; }
+.wb .wb-sticker-text { fill: var(--anatomy-hi); font-family: var(--anatomy-mono); font-weight: 700; }
+.wb .wb-sheen { transform-box: fill-box; transform: translateX(-100%); opacity: 0; }
+.wb [data-hot] .wb-sheen,
+.wb [data-active] .wb-sheen { animation: wb-sheen 2.8s ease-in-out infinite; }
+@keyframes wb-sheen {
+  0% { transform: translateX(-100%); opacity: 1; }
+  45%, 100% { transform: translateX(100%); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wb .wb-sheen { animation: none !important; transform: none; opacity: 0.35; }
+}
+
+/* The room: back wall with a skirting board, plank floor (faded into the plate by gradient paints). */
+.wb .wb-wall { fill: var(--anatomy-shade-2); }
+.wb .wb-floor-line { opacity: 0.55; }
+.wb .wb-floor-joint { opacity: 0.4; }
+.wb .wb-soft-contact { fill: url(#wb-g-contact); opacity: 0.4; }
+.wb .wb-soft-wall { fill: url(#wb-g-wall); opacity: 0.16; }
+/* Soft shadows: gradient-filled ellipses (see Workbench.tsx SOFT), no filters. */
+.wb .wb-soft-halo { fill: url(#wb-g-halo); opacity: calc(var(--anatomy-halo-opacity) * 1.6); }
+/* The room fades into the plate through gradient paints (room() in the build), not a mask. */
+.wb .wb-room .wb-wall { fill: url(#wb-room-wall); }
+.wb .wb-room .iso-line { stroke: url(#wb-room-line); }
+.wb .wb-room .wb-skirt .iso-fill { fill: url(#wb-room-wall); }
+.wb .wb-room .wb-skirt .iso-shade, .wb .wb-room .wb-skirt .iso-top { fill: url(#wb-room-wall); }
+.wb .wb-room .wb-skirt .iso-edge, .wb .wb-room .wb-skirt .iso-crease { stroke: url(#wb-room-skirt); }
+
+/* Picture frame on the back wall: a wooden moulding, a white mat and an empty art window (filled later). */
+.wb .wb-frame-mat { fill: var(--anatomy-top); }
+.wb .wb-frame-art { fill: var(--anatomy-shade-3); }

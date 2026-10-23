@@ -1,38 +1,50 @@
 /**
  * EXPERIENCE CONTENT — edit me.
  * src/content/ is the ONLY place to edit portfolio content.
- * All data below is placeholder.
  */
 import type { ExperienceEntry } from "./types";
 
 export const experience: ExperienceEntry[] = [
   {
-    company: "Northwind Labs",
-    role: "Senior Frontend Engineer",
-    period: "2023 — Present",
+    company: "Chabit",
+    role: "Software Developer",
+    period: "Sept 2025 — Present",
+    location: "Hybrid",
+    highlights: [
+      "Led the website build with Astro and React on a scalable, performance-first architecture.",
+      "Shipped 3D scenes and advanced animations with Three.js, Spline and GSAP, with lazy loading and asset budgets.",
+      "Built an internal React / React Native component library, documented in Storybook and published via GitHub Packages.",
+      "Worked directly with the client's founders on product and UX/UI decisions.",
+    ],
+  },
+  {
+    company: "Primarket",
+    role: "Frontend Developer",
+    period: "Apr 2025 — Sept 2025",
     location: "Remote",
     highlights: [
-      "Lead the design system used across 4 product squads.",
-      "Drove an accessibility program that took core flows to WCAG AA.",
+      "Built interfaces for a B2B raw-materials marketplace with Next.js and Material UI in a Scrum team.",
+      "Created and refactored reusable components from design specs and team feedback.",
+      "Kept views scalable, fast, responsive and accessible.",
     ],
   },
   {
-    company: "Helix Analytics",
-    role: "Frontend Engineer",
-    period: "2020 — 2023",
-    location: "Buenos Aires",
+    company: "Mamparas Esmeralda",
+    role: "Freelance Frontend Developer",
+    period: "Apr 2024 — Jun 2024",
+    location: "Remote",
     highlights: [
-      "Built real-time dashboards rendering live telemetry at 60fps.",
-      "Introduced visual regression testing; cut UI bugs in prod by ~40%.",
+      "Planned, designed and built the company website with Astro.",
+      "Optimized SEO and performance; added product and promotions sections.",
     ],
   },
   {
-    company: "Pixel & Bolt Studio",
-    role: "UI Developer",
-    period: "2018 — 2020",
-    location: "Buenos Aires",
+    company: "Professional Internship",
+    role: "Full-stack Developer",
+    period: "Mar 2023 — Dec 2023",
+    location: "Tandil",
     highlights: [
-      "Shipped marketing sites and e-commerce frontends for 20+ clients.",
+      "Worked on team projects during the final year of my programming technical degree.",
     ],
   },
 ];

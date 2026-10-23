@@ -67,35 +67,58 @@ export function useReadout<T extends Element>() {
   return { anchor, say };
 }
 
-export function useLoop(tick: (dt: number, calm: boolean) => boolean, running: boolean) {
+/**
+ * Runs `tick` every frame while it returns true. It may instead return the seconds until it next has
+ * something to change (a scheduled step), and the loop sleeps until then; false sleeps until kicked.
+ * A hidden tab sleeps too and resumes when it is shown again.
+ */
+export function useLoop(tick: (dt: number, calm: boolean) => boolean | number, running: boolean) {
   const latest = React.useRef(tick);
   React.useEffect(() => {
     latest.current = tick;
   });
   const frame = React.useRef(0);
+  const timer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const last = React.useRef(0);
+  const stop = React.useCallback(() => {
+    cancelAnimationFrame(frame.current);
+    frame.current = 0;
+    clearTimeout(timer.current);
+    timer.current = undefined;
+  }, []);
   const kick = React.useCallback(() => {
     if (frame.current) return;
+    clearTimeout(timer.current);
+    timer.current = undefined;
     last.current = 0;
     const step = (now: number) => {
       const dt = last.current ? Math.min((now - last.current) / 1000, LONGEST_FRAME) : 1 / 60;
       last.current = now;
       const more = latest.current(dt, asksForStillness());
-      frame.current = more ? requestAnimationFrame(step) : 0;
+      frame.current = more === true ? requestAnimationFrame(step) : 0;
+      if (typeof more === "number" && Number.isFinite(more)) {
+        timer.current = setTimeout(() => {
+          timer.current = undefined;
+          last.current = 0;
+          frame.current = requestAnimationFrame(step);
+        }, Math.max(0, more * 1000));
+      }
     };
     frame.current = requestAnimationFrame(step);
   }, []);
   React.useEffect(() => {
     if (running) kick();
-    else {
-      cancelAnimationFrame(frame.current);
-      frame.current = 0;
-    }
-    return () => {
-      cancelAnimationFrame(frame.current);
-      frame.current = 0;
+    else stop();
+    const shown = () => {
+      if (document.visibilityState === "hidden") stop();
+      else if (running) kick();
     };
-  }, [running, kick]);
+    document.addEventListener("visibilitychange", shown);
+    return () => {
+      document.removeEventListener("visibilitychange", shown);
+      stop();
+    };
+  }, [running, kick, stop]);
   return kick;
 }
 
